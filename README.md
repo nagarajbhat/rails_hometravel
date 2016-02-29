@@ -5,6 +5,7 @@ Rails Hometravel
 ----------------
 This app lets you travel from your current location to your home.
 The location of your home is taken during sign up and you can update it if needed.
+(main gems used - devise,gmaps4rails).
 
 Steps to get started
 --------------------
