@@ -1,0 +1,72 @@
+
+<div class="row">
+	<div class="col-md-3">
+		 <% if user_signed_in? %>
+			<p><b>Name</b> : <%=current_user.name %></p>
+			<p><b>Address</b> : <%= current_user.address %></p>
+			<p><b>latitude</b> : <%= current_user.latitude%></p>
+			<p><b>longitude</b> : <%= current_user.longitude %></p>
+		<% end %>
+		<%=link_to 'Update info',edit_user_registration_path %>
+	</div>
+	<div class="col-md-6">
+		
+
+		  <div style='width: 800px;'>
+		    <div id="directions" style='width: 600px; height: 600px;'></div>
+		  </div>
+		 
+	</div>
+	<div class="col-md-1"></div>
+	<div id="userslist" class="col-md-2">
+		<h3>Users</h3>
+		<% @users.each do |user| %>
+			<p><%=link_to user.name,home_path(user) %></p>
+		<% end %>
+	</div>
+</div>
+	
+
+
+
+  <%= javascript_tag do %>
+  	window.lati1 = '<%= current_user.latitude %>';
+	window.longi1 = '<%= current_user.longitude %>';
+  <%end%>
+ <script type="text/javascript">
+$( document ).ready(function() {
+
+	var directionsDisplay = new google.maps.DirectionsRenderer();
+	var directionsService = new google.maps.DirectionsService();
+
+	function calcRoute(position) {
+		  var lati2 = position.coords.latitude;
+		  var longi2 = position.coords.longitude;
+
+		  var origin      = new google.maps.LatLng(lati2, longi2);
+		  var destination = new google.maps.LatLng(lati1, longi1);
+		  var request = {
+		      origin:      origin,
+		      destination: destination,
+		      travelMode:  google.maps.TravelMode.DRIVING
+		  };
+		  directionsService.route(request, function(response, status) {
+		    if (status == google.maps.DirectionsStatus.OK) {
+		      directionsDisplay.setDirections(response);
+		    }
+		  });
+	}
+
+
+
+	var handler = Gmaps.build('Google');
+	handler.buildMap({ internal: {id: 'directions'}}, function(){
+		if(navigator.geolocation)
+	    navigator.geolocation.getCurrentPosition(calcRoute);
+	 	directionsDisplay.setMap(handler.getMap());
+	});
+
+	    
+	calcRoute();
+});
+</script>
