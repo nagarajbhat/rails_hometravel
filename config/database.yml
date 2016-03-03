@@ -80,6 +80,9 @@ test:
 #
 production:
   <<: *default
-  database: rails_hometravel_production
-  username: rails_hometravel
-  password: <%= ENV['rails_hometravel_DATABASE_PASSWORD'] %>
+  # database: rails_hometravel_production
+  # username: rails_hometravel
+  # password: <%= ENV['rails_hometravel_DATABASE_PASSWORD'] %>
+  database: d22i17h6kvegp0
+  username: bhbkuxsmpsfjzf
+  password: ujpcwxsZR478RAsyIRw5sopKue
