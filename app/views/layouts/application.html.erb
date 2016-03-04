@@ -17,7 +17,7 @@
 </head>
 <body>
 
- <div class="container">
+ <div class=" container">
  <header>
 	<%= render partial:'shared/header'%>
  </header>
@@ -25,7 +25,17 @@
  <p class="notice"><%= notice %></p>
  <p class="alert"><%= alert %></p>
 
-<%= yield %>
+<% if current_user %>
+	<%= yield %>
+<% else %>
+	
+	<div class="col-md-5"></div>
+	<div class="col-md-3">
+		<%= yield %>
+	</div>
+	<div class="col-md-4"></div>
+<% end %>
+
 </div>
 </body>
 </html>
