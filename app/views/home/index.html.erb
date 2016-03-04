@@ -1,6 +1,26 @@
 
 <div class="row">
-	<div class="col-md-3">
+	<div class="col-md-1 col-sd-1"></div>
+	<div id="userslist" class="col-md-2 col-sd-2">
+		
+		<%if current_user.email =='carlsegan@gmail.com' %>
+			<h3>Users</h3>
+				<% @users.each do |user| %>
+						<p><%=link_to user.name,home_path(user) %></p>
+				<%end%>
+		<% end %>
+	</div>
+	
+	<div class="col-md-6 col-sd-6">
+		
+
+		  <div style='width: 100%'>
+		    <div id="directions" style='width: 90%; height: 35em;'></div>
+		  </div>
+		 
+	</div>
+
+	<div class="col-md-3 col-sd-3">
 		 <% if user_signed_in? %>
 			<p><b>Name</b> : <%=current_user.name %></p>
 			<p><b>Address</b> : <%= current_user.address %></p>
@@ -9,21 +29,7 @@
 		<% end %>
 		<%=link_to 'Update info',edit_user_registration_path %>
 	</div>
-	<div class="col-md-6">
-		
 
-		  <div style='width: 800px;'>
-		    <div id="directions" style='width: 600px; height: 600px;'></div>
-		  </div>
-		 
-	</div>
-	<div class="col-md-1"></div>
-	<div id="userslist" class="col-md-2">
-		<h3>Users</h3>
-		<% @users.each do |user| %>
-			<p><%=link_to user.name,home_path(user) %></p>
-		<% end %>
-	</div>
 </div>
 	
 
