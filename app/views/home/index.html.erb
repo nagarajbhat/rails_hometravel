@@ -15,7 +15,7 @@
 		
 
 		  <div style='width: 100%'>
-		    <div id="directions" style='width: 90%; height: 35em;'></div>
+		    <div id="directions"  style='width: 90%; height: 35em;'></div>
 		  </div>
 		 
 	</div>
@@ -41,14 +41,14 @@
   <%end%>
  <script type="text/javascript">
 $( document ).ready(function() {
-
 	var directionsDisplay = new google.maps.DirectionsRenderer();
 	var directionsService = new google.maps.DirectionsService();
 
 	function calcRoute(position) {
+		 
 		  var lati2 = position.coords.latitude;
 		  var longi2 = position.coords.longitude;
-
+ 
 		  var origin      = new google.maps.LatLng(lati2, longi2);
 		  var destination = new google.maps.LatLng(lati1, longi1);
 		  var request = {
@@ -63,16 +63,21 @@ $( document ).ready(function() {
 		  });
 	}
 
-
-
+	
+	
 	var handler = Gmaps.build('Google');
 	handler.buildMap({ internal: {id: 'directions'}}, function(){
-		if(navigator.geolocation)
+		if(navigator.geolocation){
 	    navigator.geolocation.getCurrentPosition(calcRoute);
 	 	directionsDisplay.setMap(handler.getMap());
+	 } else {
+    showError("Your browser does not support Geolocation!");
+  }
 	});
 
-	    
-	calcRoute();
+
+    calcRoute();
+
+	
 });
 </script>
